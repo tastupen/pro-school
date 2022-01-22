@@ -31,9 +31,13 @@ gem 'bootsnap', '>= 1.9.3', require: false
 #bootstrap
 gem 'bootstrap', '~> 4.6.0'
 gem 'jquery-rails'
+gem 'uglifier'
 
 #devise
 gem 'devise'
+
+#環境変数管理
+gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

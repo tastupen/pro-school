@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5 devise-margin">
+      <h2 class="devise-title">パスワード変更</h2>
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class="form-group">
+          <%= f.label :password,"",class: "col-md-5 col-form-label text-md-left" do %>
+            パスワード
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.password_field :password,
+              class: "form-control #{"is-invalid" if resource.errors.messages[:email].present? } school-login-input",
+              autofocus: true,
+              autocomplete: "new-password",
+              placeholder: "パスワード"
+            %>
+            <% if resource.errors.messages[:password].present? %>
+              <span class="school-error-message">
+                <strong><%= resource.errors.full_messages_for(:name).first %></strong>
+              </span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :password_confirmation, "", class: "col-md-5 col-form-label text-md-left" do%>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.password_field :password_confirmation,
+              class: "form-control school-login-input",
+              autocomplete: "new-password",
+              placeholder: "パスワード(確認)"
+            %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary w-100">
+            パスワードを変更する
+          </button>
+      <% end %>
+
+      <%= render "users/shared/links" %>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5 devise-margin">
+      <h2 class="devise-title">パスワードを忘れましたか？</h2>
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+
+        <div class="form-group">
+          <%= f.label :email, "",class: "col-md-5 col-form-label text-md-left" do %>
+            メールアドレス
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end %>
+          <div class="col-md-12">
+            <%= f.email_field :email,
+              autofocus: true,
+              autocomplete: "email",
+              class: "form-control #{"is-invalid" if alert } school-login-input",
+              placeholder: "メールアドレス" 
+            %>
+            <% if alert %>
+              <span class="school-error-message">
+                <strong>メールアドレスが正しくない可能性があります。</strong>
+              </span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary w-100">
+            送信
+          </button>
+        </div>
+      <% end %>
+
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>
