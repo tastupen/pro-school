@@ -2,6 +2,9 @@
   <div class="row justify-content-center">
     <div class="col-md-5 devise-margin">
       <h2 class="devise-title">ログイン</h2>
+      <div class="devise-logo">
+        <%= image_tag '/images/logo.png', alt: "ロゴ", class: "deviselogo-width" %>
+      </div>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 

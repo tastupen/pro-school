@@ -3,6 +3,10 @@
     <div class="col-md-5 devise-margin">
       <h2 class="devise-title">パスワード変更</h2>
 
+      <div class="devise-logo">
+        <%= image_tag '/images/logo.png', alt: "ロゴ", class: "deviselogo-width" %>
+      </div>
+
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
         <%= f.hidden_field :reset_password_token %>
