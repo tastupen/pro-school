@@ -1,0 +1,67 @@
+<div class="container"> 
+  <div class="row justify-content-center">
+    <div lass="col-md-5 devise-margin">
+      <h2 class="devise-title">先生用アカウントの編集</h2>
+      
+      <div class="devise-logo">
+        <%= image_tag '/images/logo.png', alt: "ロゴ", class: "deviselogo-width" %>
+      </div>
+
+      <%= form_with model: @admin, url: admin_path, local: true, method: :put do |f| %>
+
+        <div class="form-group row">
+          <%= f.label :email, "",class: "col-md-5 col-form-label text-md-left" do%>
+            メールアドレス
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.email_field :email,
+              class: "form-control school-login-input",
+              autofocus: true,
+              required: "",
+              autocomplete: "email",
+              placeholder: "メール"
+            %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :password, "", class: "col-md-5 col-form-label text-md-left" do %>
+            パスワード
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.password_field :password,
+              class: "form-control school-login-input",
+              autofocus: true,
+              autocomplete: "new-password",
+              placeholder: "パスワード"
+            %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :password_confirmation, "", class: "col-md-5 col-form-label text-md-left" do%>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.password_field :password_confirmation,
+              class: "form-control school-login-input",
+              autocomplete: "new-password",
+              placeholder: "パスワード(確認)"
+            %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary w-100">
+            アカウント更新
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

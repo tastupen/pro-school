@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Proschool</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render partial: 'layouts/dashboard/header' %>
+    <div class="row mh-100">
+      <div class="col-3 mt-3 dashboard-phone">
+        <%= render partial: 'layouts/dashboard/sidebar' %>
+      </div>
+      <div class="col-md-6" style="border-left: 1px solid #ced4da;">
+        <div>
+          <main class="mb-5">
+            <%= yield %>
+          </main>
+        </div>
+      </div>
+  </body>
+</html>

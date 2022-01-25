@@ -1,0 +1,86 @@
+<div class="container"> 
+  <div class="row justify-content-center">
+    <div lass="col-md-5 devise-margin">
+      <h2 class="devise-title">先生用プロフィールの編集</h2>
+
+      <div class="devise-logo">
+        <%= image_tag '/images/logo.png', alt: "ロゴ", class: "deviselogo-width" %>
+      </div>
+
+      <%= form_with model: @admin, url: admin_path, local: true, method: :put do |f| %>
+
+        <div class="form-group row">
+          <%= f.label :name, "", class: "col-md-5 d-flex justify-content-start" do %>
+            アイコン
+            <% if @admin.image.attached? %>
+              <%= image_tag @admin.image, id: "admin-image-preview", class: "aicn-image" %>
+            <% else %>
+              <%= image_tag '/images/aicn.png', id: "admin-image-preview", class: "aicn-image" %>
+            <% end %>
+          <% end %>
+          <div class="col-md-7">
+            <small class="mb-3">誰か伝わる画像をアップロードして下さい。</small>
+            <%= f.label "画像を選択", for: "admin_image", class: "btn btn-primary" %>
+            <%= f.file_field :image, { onChange: "javascript: handleImage(this.files);", style: "display: none;"} %>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <%= f.label :name, "", class: "col-md-5 col-form-label text-md-left" do %>
+            名前
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.text_field :name,
+              class: "form-control school-login-input",
+              autofocus: "true",
+              required: "",
+              autocomplete: "name",
+              placeholder: "スクール太郎" 
+            %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :description, "", class: "col-md-5 col-form-label text-md-left" do %>
+            経歴
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">任意</span>
+            </span>
+          <% end %>
+          <div class="col-md-12">
+            <%= f.text_area :description,
+              class: "form-control school-login-input",
+              autofocus: "true",
+              required: "",
+              autocomplete: "name",
+              placeholder: "経歴など実績をお書きください",
+              style: "height: 184px;resize: none;" 
+            %>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary w-100">
+            プロフィールを更新
+          </button>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>
+
+<script>
+  function handleImage(image) {
+    let reader = new FileReader();
+    reader.onload = function() {
+      let imagePreview = document.getElementById("admin-image-preview");
+      imagePreview.src = reader.result;
+      imagePreview.className += "aicn-image";
+    };
+  console.log(image);
+  reader.readAsDataURL(image[0]);
+  }
+</script>
