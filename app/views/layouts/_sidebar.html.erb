@@ -1,20 +1,63 @@
 <nav class="col-md-2 d-none d-md-block bg-white sidebar lesson-phone">
   <div class="sidebar-sticky">
-    <div class="user-name">
-      <h3>ユーザ名前</h3>
+    <div class="user-name text-center">
+      <% if user_signed_in? %>
+        <%= image_tag '/images/aicn.png', class: "sideber-icon" %>
+        <div>
+          <%= current_user.name %>さんようこそ！
+        </div>
+      <% else %>
+        <%= image_tag '/images/aicn.png', class: "sideber-icon" %>
+        <div class="mt-3">
+          <%= link_to "ログインしてください", new_user_session_path %>
+        </div>
+      <% end %>
     </div>
+    <hr>
     <ul class="nav flex-column">
       <li class="nav-item">
-        ホーム
+        <%= link_to root_path, class: "nav-link active" do %>
+          <i class="fas fa-home fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Home</span>
+        <% end %>
       </li>
       <li class="nav-item">
-        メニュー
+        <%= link_to root_path, class: "nav-link active" do %>
+          <i class="fas fa-list fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Lesson List</span>
+        <% end %>
       </li>
       <li class="nav-item">
-        ジャンル一覧
+        <%= link_to dashboard_path, class: "nav-link active" do %>
+          <i class="fas fa-user-tie fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">先生用Account</span>
+        <% end %>
       </li>
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle",
+            role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
+            <i class="fas fa-user"></i><span span class="align-middle" style="font-size: 1.3rem;">アカウント編集</span>
+          <% end %>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <span class="dropdown-item">プロフィール編集</span>
+            <span class="dropdown-item">パスワード変更</span>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          <div>
+        </li>
+      <% end %>
+    </ul>
+    <hr>
+    <ul class="nav flex-column" style="margin-left: 20px;">
+      <h4 style="font-weight: bold;">カテゴリー一覧</h4>
       <li class="nav-item">
-        先生アカウント
+        <% @major_category_names.each do |major_category_name| %>
+          <h5 style="font-weight: bold;"><%= major_category_name %></h5>
+          <% @categories.each do |category| %>
+            <% if category.major_category_name == major_category_name %>
+              <div>
+                <%= link_to category.name %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
       </li>
     </ul>
   </div>

@@ -13,11 +13,8 @@
 
   <body class="container-fluid">
     <%= render "layouts/header" %>
-    <div class="row">
-      <%= render partial: 'layouts/sidebar' %>
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-4 bg-light" role="main">
-        <%= yield %>
-      </main>
-    </div>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
