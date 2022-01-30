@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :dashboard do
+    resources :lessons
+  end
+
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
@@ -27,10 +31,12 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    root :to => "users/sessions#new"
+    root :to => "lessons#index"
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
     delete "logout", :to => "users/sessions#destroy"
   end
+
+  resources :lessons, only: [:index, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

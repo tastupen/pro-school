@@ -1,4 +1,4 @@
-<div class="container"> 
+<div class="container" style="margin-bottom: 100px;"> 
   <div class="row justify-content-center">
     <div lass="col-md-5 devise-margin">
       <h2 class="devise-title">先生用アカウントの編集</h2>
@@ -46,6 +46,10 @@
 
         <div class="form-group row">
           <%= f.label :password_confirmation, "", class: "col-md-5 col-form-label text-md-left" do%>
+            パスワード(確認)
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
           <% end %>
           <div class="col-md-7">
             <%= f.password_field :password_confirmation,

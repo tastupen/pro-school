@@ -1,0 +1,6 @@
+<% if @status == 'success' %>
+  $("#lesson-edit").modal("hide");
+<%  elsif @status == 'false' %>
+  $("#lesson-edit").html("<%= escape_javascript(render 'dashboard/lessons/form') %>");
+  $("#lesson-edit").modal("show");
+<% end %>

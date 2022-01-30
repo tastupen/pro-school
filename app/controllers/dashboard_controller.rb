@@ -4,5 +4,6 @@ class DashboardController < ApplicationController
   
   def index
     @admin = current_admin
+    @lessons = current_admin.lessons.limit(3)
   end
 end

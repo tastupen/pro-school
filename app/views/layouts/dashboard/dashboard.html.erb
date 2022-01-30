@@ -13,16 +13,14 @@
 
   <body>
     <%= render partial: 'layouts/dashboard/header' %>
-    <div class="row mh-100">
-      <div class="col-3 mt-3 dashboard-phone">
+    <div class="container-fluid">
+      <div class="row">
         <%= render partial: 'layouts/dashboard/sidebar' %>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4 bg-light" role="main">
+          <%= yield %>
+        </main>
       </div>
-      <div class="col-md-6" style="border-left: 1px solid #ced4da;">
-        <div>
-          <main class="mb-5">
-            <%= yield %>
-          </main>
-        </div>
-      </div>
+    </div>
+    <%= render partial: 'layouts/dashboard/footer' %>
   </body>
 </html>

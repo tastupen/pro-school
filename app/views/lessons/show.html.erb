@@ -1,0 +1,91 @@
+<div class="container">
+  <h3 class="mt-3"><%= @lesson.name %>の詳細</h3>
+  <div class="row">
+    <div class="col-ml-5">
+      <div class="mx-1">
+        <div class="js-main-img">
+          <% if @lesson.images.attached? %>
+            <%= image_tag @lesson.images[0], class: "lesson-show-image" %>
+          <%else%>
+            <%= image_tag '/images/logo.png', alt: "ロゴ", class: "lesson-show-image" %>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-start mt-3">
+          <% if @lesson.images.attached? %>
+            <% @lesson.images.each do |image|%>
+              <ul class="js-sub-img" style="list-style: none;padding-left: 0px">
+                <li style="margin-right: 10px;">
+                  <%= image_tag image, src: "画像", class: "lesson-show-slide-image" %>
+                </li>
+              </ul>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="mx-1">
+        <div class="mt-3 text-center">
+          <div class="row">
+            <h5 class="col-md-5">商品名</h5>
+            <h5 class="col-md-5"><%= @lesson.name %></h5>
+          </div>
+          <div class="row">
+            <p class="col-md-5">金額<p>
+            <p class="col-md-5 text-danger">¥<%= @lesson.price %>円</p>
+          </div>
+          <button class="btn btn-primary w-75">
+            このレッスンに申し込む
+          </button>
+          <hr>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2" scope="col">商品詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>レッスン名</td>
+              <td><%= @lesson.name %></td>
+            </tr>
+            <tr>
+              <td>値段</td>
+              <td>¥<%= @lesson.price %>円</td>
+            </tr>
+            <tr>
+              <td>カテゴリー</td>
+              <td><%= @lesson.category.name %></td>
+            </tr>
+            <tr>
+              <td>先生名</td>
+              <td><%= @lesson.admin.name %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mx-1">
+         <h4>レッスン詳細</h4>
+          <div>
+            <%= raw(@lesson.description.gsub(/\r/, "<br>")) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $(".js-sub-img img").on("click", function () {
+      img = $(this).attr("src");
+      $(".js-main-img img").fadeOut(100, function () {
+        $(".js-main-img img")
+          .attr("src", img)
+          .on("load", function () {
+            $(this).fadeIn(100);
+        });
+      });
+    });
+  });
+</script>

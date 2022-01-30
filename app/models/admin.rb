@@ -5,4 +5,5 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_one_attached :image
+  has_many :lessons, dependent: :destroy
 end

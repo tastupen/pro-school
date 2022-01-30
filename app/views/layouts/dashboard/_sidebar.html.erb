@@ -1,20 +1,41 @@
-<div class="container sm-3">
-  <h3>プロフィール編集</h3>
-  <div class="d-flex flex-column">
-    <label class="school-sidebar-category-label">
-      <%= link_to "プロフィール編集", edit_profile_admin_path, class: "text-decoration-none" %>
-    </label>
-    <label class="school-sidebar-category-label">
-      <%= link_to "アカウント編集", edit_account_admin_path, class: "text-decoration-none" %>
-    </label>
+<nav class="col-md-2 d-none d-md-block bg-white sidebar dashboard-phone">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <%= link_to dashboard_path, class: "nav-link active" do %>
+          <i class="fas fa-home"></i><span class="align-middle">DashBoard</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to edit_profile_admin_path, class: "nav-link active" do %>
+          <i class="fas fa-user"></i><span class="align-middle">Profile</span>
+        <% end%>
+        <span class="sr-only">(current)</span>
+      </li>
+      <li class="nav-item">
+        <%= link_to edit_account_admin_path, class: "nav-link active" do %>
+          <i class="fas fa-user"></i><span class="align-middle">Acconut</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to dashboard_lessons_path, class: "nav-link active" do %>
+          <i class="fas fa-list"></i><span class="align-middle">Lesson List</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_dashboard_lesson_path, class: "nav-link active" do %>
+          <i class="fas fa-plus-square"></i><span class="align-middle">New Lesson</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        レッスンcsv登録
+      </li>
+      <li class="nav-item">
+        レッスン人気確認
+      </li>
+      <li class="nav-item">
+        レッスン人気データ確認
+      </li>
+    </ul>
   </div>
-
-  <h3>レッスン一覧</h3>
-  <div class="d-flex flex-column">
-    <label class="school-sidebar-category-label">レッスン一覧</label>
-    <label class="school-sidebar-category-label">レッスン登録</label>
-    <label class="school-sidebar-category-label">レッスンcsv登録</label>
-    <label class="school-sidebar-category-label">レッスン人気確認</label>
-    <label class="school-sidebar-category-label">レッスン人気データ確認</label>
-  </div>
-</div>
+</nav>

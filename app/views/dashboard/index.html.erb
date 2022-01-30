@@ -1,41 +1,114 @@
+<p id="notice"><%= notice %></p>
 <div class="container">
-  <div>
-    <div class="dashboard-base">
-      <h1>Hello <%= @admin.name %>さん!</h1>
-
-      <div class="mt-3">
-        <div class="d-flex">
-          <h3><%= @admin.name %>さんのプロフィール一覧</h3>
-          <%= link_to edit_profile_admin_path do %>
-            <i class="fas fa-external-link-alt fa-lg"></i>
-          <% end %>
-        </div>
-        <div class="row">
-          <div class=" col-10 d-flex justify-content-between">
-            <% if @admin.image.attached? %>
-              <%= image_tag @admin.image, class: "profile-image" %>
-            <% else %>
-              <%= image_tag '/images/aicn.png', class: "profile-image" %>
-            <% end %>
-            <div class="col-12">
-              <div style="margin: 10px;padding-top: 60px;">
-                <h4>name: <%= @admin.name %></h4>
-                <P>email: <%= @admin.email %></p>
+  <h1 class="mt-3">こんにちは<%= @admin.name %>さん!</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="mt-3 p-3">
+        <div class="d-flex justify-content-center">
+          <div class="card p-4">
+            <div class="image d-flex flex-column justify-content-center align-items-center">
+              <button class="dashboard-prpfile-btn btn-secondary">
+                <% if @admin.image.attached? %>
+                  <%= image_tag @admin.image, class: "profile-image" %>
+                <% else %>
+                  <%= image_tag '/images/aicn.png', class: "profile-image" %>
+                <% end %>
+              </button>
+              <span class="name mt-3"><%= @admin.name %></span>
+              <span class="idd"><%= @admin.email %></span>
+              <div class=" d-flex mt-2"> 
+                <button class="dashboard-prpfile-btn1 btn-dark">
+                  <%= link_to "Edit Profile", edit_profile_admin_path %>
+                </button> 
+              </div>
+              <div class="text mt-3">
+                <span><%= @admin.description %></span>
+              </div>
+              <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                <span><i class="fa fa-twitter"></i></span>
+                <span><i class="fa fa-facebook-f"></i></span>
+                <span><i class="fa fa-instagram"></i></span>
+                <span><i class="fa fa-linkedin"></i></span> 
+              </div>
+              <div class=" px-2 rounded mt-4 date ">
+                <span class="join"><%= @admin.created_at.strftime('%Y/%m/%d') %></span> 
               </div>
             </div>
           </div>
         </div>
-        <div class="profile-description">
-          <h4>実績・経歴</h4>
-          <div>
-            <%= raw(@admin.description.gsub(/\r/, "<br>")) %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mt-3 p-3">
+        <div class="d-flex justify-content-center">
+          <div class="card p-4"> 
+            <h3>レッスンランキング</h3>
           </div>
-        </div>
-        <hr>
-        <div>
-          <h3><%= @admin.name %>さんのレッスン一覧</h3>
         </div>
       </div>
     </div>
   </div>
+  <hr>
+  <div class="album">
+    <div class="container">
+      <div class="d-flex">
+        <h3>レッスンの一覧</h3>
+        <%= link_to dashboard_lessons_path do %>
+          <i class="fas fa-external-link-alt fa-lg"></i>
+        <% end %>
+      </div>
+      <div id="lesson-edit"class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+        <div class="row">
+          <% @lessons.each do |lesson| %>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <% if lesson.images.attached? %>
+                  <% lesson.images.each do |image| %>
+                    <%= image_tag image, class: "card-img-top", style: "height: 235px; width: 100%; display: block;" %>
+                  <% end %>
+                <%else%>
+                  <%= image_tag '/images/logo.png', alt: "ロゴ", class: "card-img-top", style: "height: 235px; width: 100%; display: block;" %>
+                <% end %>
+                <div class="card-body", style="border-top: 1px solid #ced4da;">
+                  <div class="card-text d-flex justify-content-between">
+                    コース名：<%= lesson.name%>
+                    <div class="btn-group">
+                      <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v align-middle"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right text-middle">
+                        <%= link_to "Delete", dashboard_lesson_path(lesson), method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '削除して大丈夫ですか？' } %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    説明：<%= lesson.description.truncate(15) %>
+                  </div>
+                  <div class="card-text">
+                    金額：<%= lesson.price %>円
+                  </div>
+                  <div class="card-text">
+                    カテゴリー：<%= lesson.category.name %>
+                  </div>
+                  <div class="card-text">
+                    先生：<%= lesson.admin.name %>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-outline-secondary">
+                        <%= link_to "view", lesson_path(lesson) %>
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">
+                        <%= link_to "edit", edit_dashboard_lesson_path(lesson), remote: true, id: "lesson-edit" %>
+                      </button>
+                    </div>
+                    <small><%= lesson.created_at.strftime('%Y/%m/%d') %></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+  </div> 
 </div>

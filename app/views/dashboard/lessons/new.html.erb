@@ -1,0 +1,106 @@
+<p id="alert"><%= alert %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5 devise-margin">
+      <h2 class="lesson-title">レッスン登録</h2>
+
+      <div class="devise-logo">
+        <%= image_tag '/images/logo.png', alt: "ロゴ", class: "deviselogo-width" %>
+      </div>
+
+      <%= form_with model: @product, url: dashboard_lessons_path, local: true do |f| %>
+        <div class="row form-group">
+          <%= f.label "レッスン名", "", class: "col-5 d-flex justify-content-start" do %>
+            レッスン名
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end%>
+          <div class="col-md-7">
+            <%= f.text_field :name, 
+              class: "form-control school-login-input",
+              autofocus: "true",
+              required: "",
+              autocomplete: "name",
+              placeholder: "レッスンの名前"
+            %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label "レッスン説明", "", class: "col-5 d-flex justify-content-start" do %>
+            説明
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end%>
+          <div class="col-md-12">
+            <%= f.text_area :description,
+              class: "form-control school-login-input",
+              autofocus: "true",
+              required: "",
+              autocomplete: "name",
+              placeholder: "レッスンの内容を入力してください",
+              style: "height: 244px;resize: none;"
+            %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label "金額", "", class: "col-6 d-flex justify-content-start" do %>
+            値段
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end%>
+          <div class="col-md-6">
+            <%= f.number_field :price,
+              class: "form-control school-login-input",
+              autofocus: "true",
+              required: "",
+              autocomplete: "name",
+              placeholder: "レッスンの金額"
+            %>
+          </div>
+        </div>
+        
+        <div class="row form-group">
+          <%= f.label "カテゴリー", "", class: "col-6 d-flex justify-content-start" do %>
+            カテゴリー
+            <span class="ml-1 school-require-input-label">
+              <span class="school-require-input-label-text">必須</span>
+            </span>
+          <% end%>
+          <div class="col-md-6">
+            <%= f.collection_select(
+              :category_id, @categories, :id, :name,
+              {prompt: ""},
+              {class: "custom-select school-login-input"})%>
+          </div>
+        </div>
+
+        <div>
+          <div class="form-group row">
+            <%= f.label :name, "", class: "col-md-5 d-flex justify-content-start" do %>
+              写真
+              <span class="ml-1 school-require-input-label">
+                <span class="school-require-input-label-text">任意</span>
+              </span>
+            <% end %>
+            <div class="col-md-12">
+              <small class="mb-3">練習の雰囲気がわかる画像をアップロードして下さい。</small>
+              <%= f.label "画像を選択", for: "admin_image", class: "btn btn-primary w-100" %>
+              <%= f.file_field :images, multiple: true, style: "display: none;" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary w-100">
+            レッスン登録
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
