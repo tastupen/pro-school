@@ -9,14 +9,18 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
+          <%= link_to root_path, class: "nav-link active" do %>
+          <i class="fas fa-home fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Home</span>
+        <% end %>
+        </li> 
+        <li class="nav-item">
           <%= link_to root_path, class: "nav-link" do %>
-            ホーム <span class="sr-only">(current)</span>
+            <i class="fas fa-list fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Lesson List</span>
           <% end %>
         </li>
-        <li class="nav-item dropdown">
-          <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle",
-            role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
-            メニュー
+        <li class="nav-item">
+          <%= link_to dashboard_path, class: "nav-link" do %>
+            <i class="fas fa-user-tie fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">先生用Account</span>
           <% end %>
         </li>
       </ul>
@@ -27,8 +31,9 @@
               role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
               <%= image_tag '/images/aicn.png', class: "user-profile-icon" %><span class="caret"></span>
             <% end %>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <span class="dropdown-item">ユーザー編集</span>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <span class="dropdown-item">プロフィール編集</span>
+              <span class="dropdown-item">パスワード変更</span>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
