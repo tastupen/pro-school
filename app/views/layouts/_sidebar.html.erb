@@ -2,7 +2,11 @@
   <div class="sidebar-sticky">
     <div class="user-name text-center">
       <% if user_signed_in? %>
-        <%= image_tag '/images/aicn.png', class: "sideber-icon" %>
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image, class: "sideber-icon" %>
+        <% else %>
+          <%= image_tag '/images/aicn.png', class: "sideber-icon" %>
+        <% end %>
         <div>
           <%= current_user.name %>さんようこそ！
         </div>
@@ -37,8 +41,7 @@
             <i class="fas fa-user"></i><span span class="align-middle" style="font-size: 1.3rem;">アカウント編集</span>
           <% end %>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <span class="dropdown-item">プロフィール編集</span>
-            <span class="dropdown-item">パスワード変更</span>
+            <%= link_to "MYページ", mypage_users_path, class: "dropdown-item" %>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           <div>
         </li>

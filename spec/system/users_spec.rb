@@ -78,11 +78,80 @@ RSpec.describe User, type: :system do
             # SignUpと記述のあるsubmitをクリックする
             click_button 'アカウント作成'
             #ログインしたことを確認する
-            expect(page).to have_content 'Email translation missing: ja.activerecord.errors.models.user.attributes.email.taken'
+            expect(page).to have_current_path new_user_registration_path
           end
         end
       end
     end
-
+    describe 'ログイン後' do
+      before { sign_in(user) }
+      describe 'アカウント編集' do
+        context '名前の入力値が正常' do
+          it 'アカウント編集に成功' do
+            visit mypage_edit_users_path
+            find(".userNameEditLabel").click
+            fill_in 'name', with: "テスト"
+            click_button "保存"
+            expect(page).to have_current_path mypage_users_path
+          end
+        end
+        context 'メールアドレスの入力値が正常' do
+          it 'アカウント編集に成功' do
+            visit mypage_edit_users_path
+            find(".userMailEditLabel").click
+            fill_in 'email', with: "test@example.com"
+            click_button "保存"
+            expect(page).to have_current_path mypage_users_path
+          end
+        end
+        context '名前が空欄' do
+          it 'アカウント編集に失敗' do
+            visit mypage_edit_users_path
+            find(".userNameEditLabel").click
+            fill_in 'name', with: nil
+            click_button "保存"
+            expect(page).to have_current_path mypage_edit_users_path
+          end
+        end
+        context 'メールが空欄' do
+          it 'アカウント編集に失敗' do
+            visit mypage_edit_users_path
+            find(".userMailEditLabel").click
+            fill_in 'email', with: nil
+            click_button "保存"
+            expect(page).to have_current_path mypage_edit_users_path
+          end
+        end
+      end
+      describe 'パスワード編集' do
+        context 'フォームの入力値が正常' do
+          it 'パスワードに更新成功' do
+            visit mypage_edit_password_users_path
+            fill_in "password", with: "222222"
+            fill_in "password_confirmation", with: "222222"
+            click_button "パスワード更新"
+            expect(page).to have_current_path new_user_session_path
+          end
+        end
+        context 'パスワードが空欄' do
+          it 'パスワードの更新に失敗' do
+            visit mypage_edit_password_users_path
+            fill_in "password", with: nil
+            fill_in "password_confirmation", with: "333333"
+            click_button "パスワード更新"
+            expect(page).to have_content "パスワードに不備があります。"
+          end
+        end
+        context '確認が空欄' do
+          it 'パスワードの更新に失敗' do
+            visit mypage_edit_password_users_path
+            fill_in "password", with: "222222"
+            fill_in "password_confirmation", with: nil
+            click_button "パスワード更新"
+            expect(page).to have_content "パスワードに不備があります。"
+          end
+        end
+      end
+    end
   end
 end

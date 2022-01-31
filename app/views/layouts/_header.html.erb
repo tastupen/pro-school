@@ -32,8 +32,7 @@
               <%= image_tag '/images/aicn.png', class: "user-profile-icon" %><span class="caret"></span>
             <% end %>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <span class="dropdown-item">プロフィール編集</span>
-              <span class="dropdown-item">パスワード変更</span>
+              <%= link_to "MYページ", mypage_users_path, class: "dropdown-item" %>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>

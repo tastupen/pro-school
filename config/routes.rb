@@ -37,6 +37,16 @@ Rails.application.routes.draw do
     delete "logout", :to => "users/sessions#destroy"
   end
 
+  resource :users, only: [:edit, :update] do
+    collection do
+      get "mypage", :to => "users#mypage"
+      get "mypage/edit", :to => "users#edit"
+      put "mypage", :to => "users#update"
+      get "mypage/edit_password", :to =>"users#edit_password"
+      put "mypage/password", :to => "users#update_password"
+    end
+  end
+
   resources :lessons, only: [:index, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
