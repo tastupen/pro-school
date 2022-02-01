@@ -15,16 +15,17 @@
           <div class="d-flex justify-content-between">
             <%= f.label :image, "アイコン", class: "text-md-left school-edit-user-info-label" %>
             <span class="user-edit-label">
-              <%= f.label "画像を選択", for: "admin_image", class: "btn btn-primary" %>
-              <%= f.file_field :image, { onChange: "javascript: handleImage(this.files);", style: "display: none;"} %>
+              <%= f.label "画像を選択", for: "user_image", class: "btn btn-primary" %>
+              <%= f.file_field :user_image, { onChange: "javascript: handleImage(this.files);", style: "display: none;"} %>
             </span>
           </div>
-          <div class="collapse show userImage">
-            <% if @user.image.attached? %>
-              <%= image_tag @user.image, class: "school-edit-user-info-value aicn-image", id: "admin-image-preview" %>
+          <div class="collapse show userImage d-flex justify-content-between">
+            <% if @user.user_image.attached? %>
+              <%= image_tag @user.user_image, class: "school-edit-user-info-value aicn-image", id: "admin-image-preview" %>
             <% else %>
               <%= image_tag '/images/aicn.png', class: "school-edit-user-info-value aicn-image", id: "admin-image-preview" %>
             <% end %>
+            <%= f.submit "保存", class: "btn btn-primary mt-3 w-25 h-25" %>
           </div>
         </div>
 

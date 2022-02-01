@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'web/index'
   devise_for :admins, :controllers => {
     :registrations => 'admins/registrations',
     :sessions => 'admins/sessions',
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    root :to => "lessons#index"
+    root :to => "web#index"
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
     delete "logout", :to => "users/sessions#destroy"

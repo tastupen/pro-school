@@ -2,12 +2,12 @@
   <div class="sidebar-sticky">
     <div class="user-name text-center">
       <% if user_signed_in? %>
-        <% if @user.image.attached? %>
-          <%= image_tag @user.image, class: "sideber-icon" %>
+        <% if @user.user_image.attached? %>
+          <%= image_tag @user.user_image, class: "sideber-icon" %>
         <% else %>
           <%= image_tag '/images/aicn.png', class: "sideber-icon" %>
         <% end %>
-        <div>
+        <div class="mt-3">
           <%= current_user.name %>さんようこそ！
         </div>
       <% else %>
@@ -25,7 +25,7 @@
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to root_path, class: "nav-link active" do %>
+        <%= link_to lessons_path, class: "nav-link active" do %>
           <i class="fas fa-list fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Lesson List</span>
         <% end %>
       </li>
