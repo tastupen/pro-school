@@ -34,7 +34,7 @@
                 <% @categories.each do |category| %>
                   <% if category.major_category_name == major_category_name %>
                     <div class="ml-1">
-                      <%= link_to category.name %>
+                      <%= link_to category.name, lessons_path(category: category.id) %>
                     </div>
                   <% end %>
                 <% end %>

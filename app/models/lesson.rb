@@ -8,4 +8,12 @@ class Lesson < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
   validates :category_id, presence: true
+
+  scope :display_list, -> (category) { 
+    if category != "none"
+      where(category_id: category).order("created_at DESC")
+    else
+      all.order("created_at DESC")
+    end
+  }
 end
