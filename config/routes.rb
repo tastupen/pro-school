@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rooms/show'
+  get 'chattop/index'
   get 'web/index'
   devise_for :admins, :controllers => {
     :registrations => 'admins/registrations',
@@ -49,5 +51,13 @@ Rails.application.routes.draw do
   end
 
   resources :lessons, only: [:index, :show]
+
+  # chat機能
+  get "chattop", :to => "charttops#index"
+  resources :rooms, :only => [:show, :create] do
+    resources :messages, :only => [:create]
+  end
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

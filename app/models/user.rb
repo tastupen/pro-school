@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_one_attached :user_image
 
+  has_many :rooms
+
   def update_password(params, *options)
     if params[:password].blank?
       params.delete(:password)

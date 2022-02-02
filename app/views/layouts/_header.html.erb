@@ -14,7 +14,7 @@
         <% end %>
         </li> 
         <li class="nav-item">
-          <%= link_to root_path, class: "nav-link" do %>
+          <%= link_to lessons_path, class: "nav-link" do %>
             <i class="fas fa-list fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Lesson List</span>
           <% end %>
         </li>
@@ -41,6 +41,13 @@
             <% end %>
           </div>
         </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to chattop_index_path, class: "nav-link" do %>
+            <i class="far fa-comment-dots fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Talk</span>
+          <% end %>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav mr-3">
         <% if user_signed_in? %>

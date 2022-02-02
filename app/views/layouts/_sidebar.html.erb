@@ -35,6 +35,11 @@
         <% end %>
       </li>
       <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to chattop_index_path, class: "nav-link active" do %>
+            <i class="far fa-comment-dots fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Talk</span>
+          <% end %>
+        </li>
         <li class="nav-item dropdown">
           <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle",
             role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
