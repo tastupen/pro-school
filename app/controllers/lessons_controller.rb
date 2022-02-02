@@ -1,10 +1,19 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show]
   def index
-    @lessons = Lesson.display_list(category_params)
-    @category = Category.request_category(category_params)
+    if sort_params.present?
+      @category = Category.request_category(sort_params[:sort_category])
+      @lessons = Lesson.sort_products(sort_params, params[:page])
+    elsif params[:category].present?
+      @category = Category.request_category(params[:category])
+      @lessons = Lesson.category_products(@category, params[:page])
+    else
+      @lessons = Lesson.display_list(params[:page])
+    end
+
     @categories = Category.all
     @major_category_names = Category.major_categories
+    @sort_list = Lesson.sort_list
     @user = current_user
   end
 
@@ -19,8 +28,7 @@ class LessonsController < ApplicationController
       @lesson = Lesson.find(params[:id])
     end
 
-    def category_params
-      params[:category].present? ? params[:category]
-                                 : "none"
+    def sort_params
+      params.permit(:sort, :sort_category)
     end
 end

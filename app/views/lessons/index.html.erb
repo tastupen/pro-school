@@ -6,6 +6,15 @@
       <% if @category.present? %>
         <%= link_to "トップ", "/", category: @major_category_name %> > <%= @category.name %>
         <h1><%= @category.name %>のレッスン一覧<%= @lessons.count %>件</h1>
+        <%= form_with url: lessons_path, method: :get, local: true, class: "form-inline" do |f| %>
+          <%= f.hidden_field :sort_category, value: @category.id %>
+          並び替え
+          <% if @sorted.present? %>
+            <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class: "form-inline ml-2" %>
+          <% else %>
+            <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class: "form-inline ml-2" %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
     <div class="album">
@@ -48,6 +57,7 @@
           </div>
       </div>
     </div>
+    <%= paginate @lessons %>
   </div>
 </div>
 <%= render "layouts/footer" %>
