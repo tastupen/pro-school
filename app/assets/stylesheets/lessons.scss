@@ -20,3 +20,13 @@
   height: 100px;
   width: 100px;
 }
+
+.quantity_field {
+  margin-left: 65px;
+} 
+
+@media screen and (max-width: 800px){
+  .quantity_field {
+    margin-left: 110px;
+  } 
+}

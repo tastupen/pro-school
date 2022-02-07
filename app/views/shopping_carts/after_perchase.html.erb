@@ -1,0 +1,15 @@
+<div class="container d-flex justify-content-center mt-3">
+  <div class="w-75">
+    <h3 class="text-center">~ご購入ありがとうございます!~</h3>
+
+   <h4 class="text-center"><%= @user.name %>様</h4>
+
+   <p class="text-center">この度はPro-Schoolでのレッスン購入ありがとうございます。</p>
+   <P class="text-center">購入したレッスンの講師とトークで日程などのお話をしてください！</P>
+    
+    <div class= "d-flex justify-content-end mt-3">
+      <%= link_to "買い物を続ける", root_path, class: "btn border-dark text-dark mr-3" %>
+      <%= link_to "講師と話す", chattop_index_path, class: "btn btn-primary mr-3" %>
+    </div>
+  </div>
+</div>

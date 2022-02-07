@@ -20,7 +20,7 @@
         </li>
         <li class="nav-item">
           <%= link_to dashboard_path, class: "nav-link" do %>
-            <i class="fas fa-user-tie fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">先生用Account</span>
+            <i class="fas fa-user-tie fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">先生Account</span>
           <% end %>
         </li>
         <li class="nav-item dropdown">
@@ -44,8 +44,13 @@
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to chattop_index_path, class: "nav-link" do %>
-            <i class="far fa-comment-dots fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Talk</span>
-          <% end %>
+              <i class="far fa-comment-dots fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">Talk</span>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to cart_users_path, class: "nav-link" do %>
+              <i class="fas fa-shopping-cart fa-lg"></i><span class="align-middle" style="font-size: 1.3rem;">カート</span>
+            <% end %>
           </li>
         <% end %>
       </ul>

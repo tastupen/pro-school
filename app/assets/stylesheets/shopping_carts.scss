@@ -1,0 +1,9 @@
+// Place all the styles related to the shopping_carts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+@media screen and (max-width: 800px){
+  .cart-display {
+    display: none;
+  }
+}

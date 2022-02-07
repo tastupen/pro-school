@@ -37,9 +37,29 @@
                 <p class="col-md-5">金額<p>
                 <p class="col-md-5 text-danger">¥<%= @lesson.price %>円</p>
               </div>
-              <button class="btn btn-primary w-75">
-                このレッスンに申し込む
-              </button>
+              <% if user_signed_in? %>
+                <%= form_with url: cart_create_users_path, local: true do |f| %>
+                  <%= f.hidden_field :lesson_id, value: @lesson.id %>
+                  <%= f.hidden_field :name, value: @lesson.name %>
+                  <%= f.hidden_field :price, value: @lesson.price %>
+                  <div class="row mb-3">
+                    <p class="col-md-5">数量</p>
+                    <div class="col-md-5 quantity_field">
+                      <%= f.number_field :quantity, min:1, value:1, class: "form-control w-50" %> 
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <%= f.submit "カートに追加", class: "btn btn-primary w-100" do %>
+                        <i class="fas fa-shopping-cart"></i>
+                      <% end %>
+                    </div>
+                    <div class="col-md-5">
+                      お気に入り
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
               <hr>
             </div>
             <table class="table">

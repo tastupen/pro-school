@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'rooms/show'
-  get 'chattop/index'
-  get 'web/index'
   devise_for :admins, :controllers => {
     :registrations => 'admins/registrations',
     :sessions => 'admins/sessions',
@@ -42,18 +39,26 @@ Rails.application.routes.draw do
 
   resource :users, only: [:edit, :update] do
     collection do
+      get "cart", :to => "shopping_carts#index"
+      post "cart/create", :to => "shopping_carts#create"
+      delete "cart", :to => "shopping_carts#destroy"
+      get "after_perchase", :to => "shopping_carts#after_perchase"
+      delete "cart_destroy", :to => "shopping_carts#cart_destroy"
+      delete "lesson_destroy", :to => "shopping_carts#lesson_destroy"
       get "mypage", :to => "users#mypage"
       get "mypage/edit", :to => "users#edit"
       put "mypage", :to => "users#update"
       get "mypage/edit_password", :to =>"users#edit_password"
       put "mypage/password", :to => "users#update_password"
+      get "mypage/register_card", :to => "users#register_card"
+      post "mypage/token", :to => "users#token"
     end
   end
 
   resources :lessons, only: [:index, :show]
 
   # chat機能
-  get "chattop", :to => "charttops#index"
+  get 'chattop/index'
   resources :rooms, :only => [:show, :create] do
     resources :messages, :only => [:create]
   end
