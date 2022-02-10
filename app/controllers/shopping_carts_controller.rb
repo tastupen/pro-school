@@ -42,8 +42,8 @@ class ShoppingCartsController < ApplicationController
   end
 
   def lesson_destroy
-    @lesson = Lesson.find(lesson_params[:lesson_id])
-    @user_cart.remove(@lesson, lesson_params[:quantity].to_i)
+    @lesson = Lesson.find(params[:id])
+    @user_cart.remove(@lesson, 1)
     redirect_to cart_users_path
   end
 

@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :rooms
 
+  def self.search(words)
+    @user = User.where("name LIKE ?", "%#{words}%")
+  end
+
   def update_password(params, *options)
     if params[:password].blank?
       params.delete(:password)

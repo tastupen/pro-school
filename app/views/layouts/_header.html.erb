@@ -54,6 +54,11 @@
           </li>
         <% end %>
       </ul>
+      <%= form_with url: search_path, method: :get, local: :true, class: "form-inline my-2 my-lg-0" do |f| %>
+        <%= f.select :range, options_for_select([['先生'], ['レッスン']]), {}, {class: "custom-select"} %>
+        <%= f.text_field :word, class: "form-control mr-sm-2", placeholder: "Search" %>
+        <%= f.submit "検索", class: "btn btn-outline-success my-2 my-sm-0" %>
+      <% end %>
       <ul class="navbar-nav mr-3">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">

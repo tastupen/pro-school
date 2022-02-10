@@ -7,4 +7,8 @@ class Admin < ApplicationRecord
   has_one_attached :image
   has_many :rooms
   has_many :lessons, dependent: :destroy
+
+  def self.search(words)
+    @user = Admin.where("name LIKE ? OR description LIKE ? ", "%#{words}%", "%#{words}%" )
+  end
 end

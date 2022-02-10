@@ -43,8 +43,7 @@
           <h3 class="w-100 mt-4">￥<%= user_cart_item.price_cents * user_cart_item.quantity %></h3>
         </div>
         <%= form_with url: lesson_destroy_users_path , method: :delete, class: "offset-10 col-2" do |f| %>
-          <%= f.hidden_field :lesson_id, value: lesson.id %>
-          <%= f.submit "削除", class: "btn border-dark text-dark" %>
+          <%= link_to '削除', lesson_destroy_users_path(id: lesson.id), method: :delete, class: 'btn border-dark text-dark', data: { confirm: "商品を削除してもよろしいですか？" } %>
         <% end %>
       <% end %>
     </div>

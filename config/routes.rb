@@ -58,6 +58,11 @@ Rails.application.routes.draw do
   end
 
   resources :lessons, only: [:index, :show]
+  
+  #検索機能
+
+  get 'search' => 'searchs#search'
+  get 'admins_profile/:id' => "searchs#admin_profile", as: "admin_profile"
 
   # chat機能
   get 'chattop/index'

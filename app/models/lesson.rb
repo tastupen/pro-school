@@ -35,4 +35,8 @@ class Lesson < ApplicationRecord
       "出品の新しい順" => "updated_at desc"
     }
   }
+
+  def self.search(words)
+    @lessons = Lesson.joins(:category).where("lessons.name LIKE ? OR lessons.description LIKE? OR major_category_name LIKE ? OR categories.name LIKE ? ", "%#{words}%", "%#{words}%", "%#{words}%", "%#{words}%" )
+  end
 end
