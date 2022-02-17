@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :rooms
 
+  has_many :reservations, dependent: :destroy
+
   def self.search(words)
     @user = User.where("name LIKE ?", "%#{words}%")
   end

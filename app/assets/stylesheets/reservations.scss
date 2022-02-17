@@ -1,0 +1,13 @@
+// Place all the styles related to the reservations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.reservation-show {
+  padding-top: 80px;
+}
+
+@media screen and (max-width: 800px){
+  .reservation-show {
+    padding-top: 0px;
+  }
+}

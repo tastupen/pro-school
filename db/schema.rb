@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_170951) do
+ActiveRecord::Schema.define(version: 2022_02_12_235101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,18 @@ ActiveRecord::Schema.define(version: 2022_02_06_170951) do
     t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "admin_id", null: false
+    t.bigint "lesson_id", null: false
+    t.datetime "start_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_reservations_on_admin_id"
+    t.index ["lesson_id"], name: "index_reservations_on_lesson_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "admin_id", null: false
@@ -134,6 +146,9 @@ ActiveRecord::Schema.define(version: 2022_02_06_170951) do
   add_foreign_key "lessons", "admins"
   add_foreign_key "lessons", "categories"
   add_foreign_key "messages", "rooms"
+  add_foreign_key "reservations", "admins"
+  add_foreign_key "reservations", "lessons"
+  add_foreign_key "reservations", "users"
   add_foreign_key "rooms", "admins"
   add_foreign_key "rooms", "users"
   add_foreign_key "shopping_carts", "users"

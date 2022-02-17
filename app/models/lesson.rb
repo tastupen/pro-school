@@ -4,6 +4,8 @@ class Lesson < ApplicationRecord
 
   has_many_attached :images
 
+  has_many :reservations
+
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true

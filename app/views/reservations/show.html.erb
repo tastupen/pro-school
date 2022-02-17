@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="d-flex justify-content-center mt-3">
+    <div class="w-75">
+      <h3>レッスン予約一覧</h3>
+
+      <div class="row">
+        <div class="col-md-5">
+          <div class="mx-1 text-center">
+            <% if @reservation.lesson.images.attached? %>
+              <%= image_tag @reservation.lesson.images[0], class: "lesson-show-image" %>
+            <% else %>
+              <%= image_tag '/images/logo.png', alt: "ロゴ", class: "img-fuild w-75" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="mx-1">
+            <div class="mt-6 text-center">
+              <div class="row reservation-show">
+                <h5 class="col-md-5">商品名</h5>
+                <h5 class="col-md-5"><%= @reservation.lesson.name %></h5>
+              </div>
+              <div class="row">
+                <h5 class="col-md-5">金額</h5>
+                <h5 class="col-md-5 text-danger">¥<%= @reservation.lesson.price %></h5>
+              </div>
+              <div class="row">
+                <h5 class="col-md-5">予約時間</h5>
+                <h5 class="col-md-5"><%= @reservation.start_time.hour %>:<%= @reservation.start_time.min %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" scope="col">商品詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>レッスン名</td>
+            <td><%= @reservation.lesson.name %></td>
+          </tr>
+          <tr>
+            <td>値段</td>
+            <td>¥<%= @reservation.lesson.price %>円</td>
+          </tr>
+          <tr>
+            <td>カテゴリー</td>
+            <td><%= @reservation.lesson.category.name %></td>
+          </tr>
+          <tr>
+            <td>先生名</td>
+            <td><%= @reservation.admin.name %></td>
+          </tr>
+          <tr>
+            <td>生徒名</td>
+            <td><%= @reservation.user.name %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+    </div>
+  </div>
+</div>

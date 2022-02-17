@@ -15,9 +15,9 @@ class Dashboard::LessonsController < ApplicationController
   def create
     @lesson = current_admin.lessons.new(lesson_new_params)
     if @lesson.save
-      redirect_to dashboard_lessons_path, notice: "レッスン投稿に成功しました!"
+      redirect_to dashboard_lessons_path, flash: { success: "レッスン投稿に成功しました!" }
     else
-      redirect_to new_dashboard_lesson_path, alert: 'レッスンの投稿に失敗しました。'
+      redirect_to new_dashboard_lesson_path, flash: { danger: 'レッスンの投稿に失敗しました。' }
     end
   end
 
@@ -39,7 +39,7 @@ class Dashboard::LessonsController < ApplicationController
 
   def destroy
     @lesson.destroy
-    redirect_to dashboard_lessons_path, notice: "削除に成功しました！"
+    redirect_to dashboard_lessons_path, flash: { success: "削除に成功しました！" } 
   end
 
   private

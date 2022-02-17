@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <%= render "layouts/flash"%>
+
+      <h3 class="mt-3">予約一覧</h3>
+
+      <hr>
+      
+      <% if user_signed_in? %>
+        <!--Userでログインしてたら-->
+        <%= month_calendar events: @reservations do |date, reservations| %>
+          <%= date %>
+
+          <% reservations.each do |reservation| %>
+            <%= link_to reservation_path(reservation), style: "text-decoration: none;" do %>
+              <div>
+                <div>
+                  <%= reservation.start_time.hour %>:<%= reservation.start_time.min %>
+                </div>
+                <div>
+                  <%= reservation.lesson.name %>
+                </div>
+                <div>
+                  <%= reservation.admin.name %>
+                </div>
+            </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <table class="table">
+          <thead>
+            <th scope="col">レッスン名前</th>
+            <th scope="col">レッスン講師</th>
+            <th scope="col">生徒名</th>
+            <th scope="col">レッスン日付</th>
+            <th colspan="2"></th>
+          </thead>
+          <tbody>
+            <% @reservations.each do |reservation|%>
+              <tr id="reservation-<%= reservation.id %>"></tr>
+              <td><%= reservation.lesson.name%></td>
+              <td><%= reservation.admin.name%></td>
+              <td><%= reservation.user.name%></td>
+              <td><%= reservation.start_time.year %>年<%= reservation.start_time.month %>月<%= reservation.start_time.day %>日-<%= reservation.start_time.hour %>:<%= reservation.start_time.min %></td>
+            <% end %>
+          </tbody>
+        </table>
+
+      <% else admin_signed_in? %>
+        <!--adminでログインしてたら-->
+        <%= link_to '予約する', new_reservation_path %>
+        <br>
+        
+        <%= month_calendar events: @reservations do |date, reservations| %>
+          <%= date %>
+
+          <% reservations.each do |reservation| %>
+            <%= link_to reservation_path(reservation), style: "text-decoration: none;" do %>
+              <div>
+                <div>
+                  <%= reservation.start_time.hour %>:<%= reservation.start_time.min %>
+                </div>
+                <div>
+                  <%= reservation.lesson.name %>
+                </div>
+                <div>
+                  <%= reservation.user.name %>
+                </div>
+            </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <table class="table">
+          <thead>
+            <th scope="col">レッスン名前</th>
+            <th scope="col">レッスン講師</th>
+            <th scope="col">生徒名</th>
+            <th scope="col">レッスン日付</th>
+            <th colspan="2"></th>
+          </thead>
+          <tbody>
+            <% @reservations.each do |reservation|%>
+              <tr id="reservation-<%= reservation.id %>"></tr>
+              <td><%= reservation.lesson.name%></td>
+              <td><%= reservation.admin.name%></td>
+              <td><%= reservation.user.name%></td>
+              <td><%= reservation.start_time.year %>年<%= reservation.start_time.month %>月<%= reservation.start_time.day %>日-<%= reservation.start_time.hour %>:<%= reservation.start_time.min %></td>
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v align-middle"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right text-middle">
+                    <%= link_to "編集", edit_reservation_path(reservation), class: "dropdown-item" %>
+                    <%= link_to "キャンセル", reservation_path(reservation), method: :delete, class: "dropdown-item text-danger", data: { confirm: 'レッスンをキャンセルしてよろしいですか?' } %>
+                  </div>
+                </div>
+              </td>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

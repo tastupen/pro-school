@@ -58,6 +58,8 @@ Rails.application.routes.draw do
   end
 
   resources :lessons, only: [:index, :show]
+
+  resources :reservations
   
   #検索機能
 

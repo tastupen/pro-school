@@ -8,6 +8,8 @@ class Admin < ApplicationRecord
   has_many :rooms
   has_many :lessons, dependent: :destroy
 
+  has_many :reservations, dependent: :destroy
+
   def self.search(words)
     @user = Admin.where("name LIKE ? OR description LIKE ? ", "%#{words}%", "%#{words}%" )
   end
