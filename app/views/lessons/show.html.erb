@@ -55,7 +55,15 @@
                       <% end %>
                     </div>
                     <div class="col-md-5">
-                      お気に入り
+                      <% if current_user.liked_by?(@lesson.id) %>
+                        <%= link_to destroy_like_path(@lesson), method: :DELETE, class: "btn btn-primary w-100" do %>
+                          <i class="fa fa-heart"></i>お気に入り解除
+                        <% end %>
+                      <% else %>
+                        <%= link_to  create_like_path(@lesson), method: :POST, class: "btn btn-primary w-100" do %>
+                          <i class="fa fa-heart"></i>お気に入り登録
+                        <% end %>
+                      <% end %>
                     </div>
                   </div>
                 <% end %>

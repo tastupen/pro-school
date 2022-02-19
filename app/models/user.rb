@@ -6,6 +6,12 @@ class User < ApplicationRecord
 
   has_many :rooms
 
+  has_many :likes
+
+  def liked_by?(lesson_id)
+    likes.where(lesson_id: lesson_id).exists?
+  end
+
   has_many :reservations, dependent: :destroy
 
   def self.search(words)

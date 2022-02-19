@@ -6,6 +6,8 @@ class Lesson < ApplicationRecord
 
   has_many :reservations
 
+  has_many :likes
+
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true

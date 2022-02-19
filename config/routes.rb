@@ -60,9 +60,11 @@ Rails.application.routes.draw do
   resources :lessons, only: [:index, :show]
 
   resources :reservations
+  #いいね機能
+  post 'like/:id' => 'likes#create', as: 'create_like'
+  delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
   
   #検索機能
-
   get 'search' => 'searchs#search'
   get 'admins_profile/:id' => "searchs#admin_profile", as: "admin_profile"
 
