@@ -57,7 +57,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :lessons, only: [:index, :show]
+  resources :lessons, only: [:index, :show] do
+    resources :comments, only: [:create]
+  end
 
   resources :reservations
   #いいね機能

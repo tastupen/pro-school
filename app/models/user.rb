@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :likes
 
+  has_many :comments
+
   def liked_by?(lesson_id)
     likes.where(lesson_id: lesson_id).exists?
   end

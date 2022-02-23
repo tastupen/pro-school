@@ -8,6 +8,16 @@ class Lesson < ApplicationRecord
 
   has_many :likes
 
+  has_many :comments
+
+  def comments_new
+    comments.new
+  end
+
+  def comments_with_id
+    comments.comments_with_id
+  end
+
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true

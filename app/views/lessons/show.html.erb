@@ -104,6 +104,44 @@
           </div>
         </div>
       </div>
+      <hr>
+      <% if user_signed_in? %>
+        <div class="row">
+          <div class="offset-md-5 col-md-5">
+            <%= form_with model: @comment, row: 5 ,url: lesson_comments_path(@lesson) do |f| %>
+              <%= f.text_area :content, class: "form-control m-2", style: "height: 133px;resize: none;" %>
+              <div id="rating-form">
+                <label>評価：</label>
+                <%# scoreNameの値をhidden_fieldでカラムに送っている %>
+                <%= f.hidden_field :rate, :value => 'score' %>
+              </div>
+              <%= f.submit "レビューを追加" , class:"btn btn-primary ml-2"%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <br>
+      <div class="row">
+        <% @comments.each do |comment| %>
+          <div class="offset-md-5 col-md-5">
+            <div class="detail-value", id="star-comf-<%= comment.id %>"></div>
+            <script>
+              $('#star-comf-<%= comment.id %>').raty({      //.idでどの評価であるかを取得
+                size: 38,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,                             //readOnlyオプションで読み込み専用とする。編集できない。
+                score: <%= comment.rate %>,              //scoreオプションで評価内容を取得
+              });
+            </script>
+            <div class="review-rating" data-score="<%= comment.rate %>">評価:<%= comment.rate%>/5点</div>
+            <p class="h3"><%= comment.content %></p>
+            <label><%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></label>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
@@ -121,5 +159,11 @@
         });
       });
     });
+  });
+
+  $('#rating-form').raty({
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    scoreName: 'comment[rate]'
   });
 </script>
