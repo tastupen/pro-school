@@ -1,0 +1,39 @@
+<div class="container  d-flex justify-content-center mt-3">
+  <div class="w-75">
+    <h1>お気に入り</h1>
+
+    <hr>
+
+    <div class="row">
+      <% @favorites.each do |favorite| %>
+        <% lesson = Lesson.find_by(id: favorite.lesson_id)%>
+        <div class="col-md-8 mt-2">
+          <div class="d-inline-flex">
+            <%= link_to lesson_path(lesson), class: "w-25" do %>
+              <% if lesson.images.attached? %>
+                <%= image_tag lesson.images[0], class: "img-fuild w-75" %>
+              <%else%>
+                <%= image_tag '/images/logo.png', alt: "ロゴ", class: "img-fuild w-75" %>
+              <% end %>
+            <% end %>
+            <div class="container mt-3">
+              <h5 class="w-100 samazon-favorite-item-text"><%= lesson.name %></h5>
+              <h6 class="w-100samazon-favorite-item-text">￥<%= lesson.price %></h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-end">
+          <%= link_to lesson_path(lesson), class: "samazon-favorite-item-delete" do %>
+            削除
+          <% end %>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-end">
+          <button type="submit" class="btn btn-primary text-white w-100">カートに入れる</button>
+        </div>
+      <% end %>
+    </div>
+
+    <hr>
+
+  </div>
+</div>

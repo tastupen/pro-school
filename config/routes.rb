@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       post "mypage/token", :to => "users#token"
       get "mypage/cart_history", :to => "users#cart_history_index", :as => "mypage_cart_histories"
       get "mypage/cart_history/:num", :to => "users#cart_history_show", :as => "mypage_cart_history"
+      get  "mypage/favorite", :to => "users#favorite"
     end
   end
 

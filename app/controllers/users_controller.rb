@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   def mypage
   end
 
+  def favorite
+    @favorites = Like.where(user_id: current_user.id).order(created_at: :desc)
+  end
+
   def register_card
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     @count = 0
