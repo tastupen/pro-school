@@ -3,7 +3,7 @@ FactoryBot.define do
     name                  {"クロール"}
     description           {"初級コース"}
     price                 {"5000"}
-    association :category
-    association :admin
+    category
+    admin
   end
 end

@@ -98,8 +98,8 @@ RSpec.describe Reservation, type: :system do
       end
     end
     describe "予約時間編集" do
-      let!(:lesson) {create(:lesson)}
-      let!(:reservation) { create(:reservation) }
+      let(:lesson) {create(:lesson, admin: asmin, category: category)}
+      let(:reservation) { create(:reservation, user: user, lesson: lesson, admin:admin) }
       before { sign_in(admin) }
       before { edit_reservation_path(reservation)}
       context "レッスン時間の編集" do
