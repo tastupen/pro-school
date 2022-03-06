@@ -98,19 +98,19 @@ RSpec.describe Reservation, type: :system do
       end
     end
     describe "予約時間編集" do
-      let(:lesson) {create(:lesson, admin: asmin, category: category)}
+      let(:lesson) {create(:lesson, admin: admin, category: category)}
       let(:reservation) { create(:reservation, user: user, lesson: lesson, admin:admin) }
       before { sign_in(admin) }
-      before { edit_reservation_path(reservation)}
       context "レッスン時間の編集" do
         it "編集に成功" do
-          select 'クロール', from: 'lesson_id'
-          select 'test', from: 'user_id'
-          select '2022', from: '[start_time(1i)]'
-          select '2月', from: '[start_time(2i)]'
-          select '15', from: '[start_time(3i)]'
-          select '16', from: '[start_time(4i)]'
-          select '30', from: '[start_time(5i)]'
+          visit edit_reservation_path(reservation)
+          select 'クロール', from: 'reservation[lesson_id]'
+          select 'test', from: 'reservation[user_id]'
+          select '2022', from: 'reservation[start_time(1i)]'
+          select '2月', from: 'reservation[start_time(2i)]'
+          select '15', from: 'reservation[start_time(3i)]'
+          select '16', from: 'reservation[start_time(4i)]'
+          select '30', from: 'reservation[start_time(5i)]'
           click_button 'レッスン登録'
           expect(page).to have_content "レッスンの更新に成功しました。"
         end
