@@ -57,7 +57,34 @@
                     </div>
                     <%= lesson.name %>
                   <% end %>
-                <hr>
+                  <hr>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mt-3 p-3">
+        <div class="d-flex justify-content-center">
+          <div class="card p-4">
+            <h3>コメントランキング</h3>
+            <% @lesson_comment_rank.each.with_index(1) do |lesson, i| %>
+              <div id="lesson-<% lesson.id %>">
+                第<%= i %>位
+                <div>
+                  <%= link_to lesson_path(lesson) do %>
+                    <div>
+                      <% if lesson.images.attached? %>
+                        <%= image_tag lesson.images[0], class: "img-fuild w-75" %>
+                      <%else%>
+                        <%= image_tag '/images/logo.png', alt: "ロゴ", class: "img-fuild w-75" %>
+                      <% end %>
+                    </div>
+                    <%= lesson.name %>
+                  <% end %>
+                  <hr>
                 </div>
               </div>
             <% end %>
