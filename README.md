@@ -5,21 +5,34 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby Version
+3.0.3
+
+* Rails Version
+6.1.4.4
+
 
 * System dependencies
 
 * Configuration
 
 * Database creation
+postgresql
 
-* Database initialization
+* test
+Rspec 
 
-* How to run the test suite
+* Services
+スポーツを頑張りたい人がプロと繋がって、技術向上を目指せたらいいなという思いでレッスンを販売できるようなサイトを構築した
 
-* Services (job queues, cache servers, search engines, etc.)
+* 使用したGem
+bootstrap
+Jquery
+devise
+kaminari
+font-awosome
+acts_as_shopping_cart'
+pay.jp
+simple_calendar
 
-* Deployment instructions
-
-* ...
 # pro-school
