@@ -29,7 +29,10 @@
           </div>
         </li>
         <li class="nav-item">
-          <%= link_to "生徒用ページへ", root_path, class: "nav-link text-white" %>
+          <%= link_to "Talk", chattop_index_path, class: "nav-link active text-white" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "予約一覧", reservations_path, class: "nav-link active text-white" %>
         </li>
         <li class="nav-item">
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-white" %>
